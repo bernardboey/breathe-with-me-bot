@@ -12,7 +12,12 @@ bot_token = config("BOT_TOKEN")
 bot = telebot.TeleBot(token=bot_token)
 server = Flask(__name__)
 
-messages = ["Relax, focus on your breathing!", "You're doing great!", "Stay with me!", "Forget about everything else, and focus inwards."]
+messages = [
+	"Relax, focus on your breathing!",
+	"You're doing great!",
+	"Stay with me!",
+	"Forget about everything else, and focus inwards."
+	]
 breathe_sessions = {}
 
 
