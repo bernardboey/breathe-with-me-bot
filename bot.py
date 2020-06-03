@@ -29,20 +29,18 @@ HELP_TEXT = ("I can help you regulate your breathing, by sending you regularly t
              "/slower - decrease breathing rate\n"
              "\n"
              "Created with love by @bernard_boey")
-
+DEFAULT_DURATION = 0.6
 
 class BreatheSession:
     def __init__(self, message):
         self.max_count = 4
-        self.duration = 0.8
+        self.duration = DEFAULT_DURATION
         self.stop = True
         self.id = message.chat.id
 
     def breathe(self):
         self.stop = False
         bot.send_message(self.id, "Okay! Stop anytime by telling me /stop")
-        time.sleep(1)
-        bot.send_message(self.id, "Current duration: " + str(self.duration) + " secs")
         time.sleep(1)
         bot.send_message(self.id, "You can also tell me /faster or /slower")
         time.sleep(1)
@@ -55,34 +53,34 @@ class BreatheSession:
             for i in range(2, self.max_count + 1):
                 if self.stop:
                     break
-                bot.send_message(self.id, f"{i}...")
+                bot.send_message(self.id, f"...{i}")
                 time.sleep(self.duration)
             if self.stop:
                 break
-            bot.send_message(self.id, "Hold...")
+            bot.send_message(self.id, "hold...")
             time.sleep(self.duration)
             for i in range(2, self.max_count + 1):
                 if self.stop:
                     break
-                bot.send_message(self.id, f"{i}...")
+                bot.send_message(self.id, f"...{i}")
                 time.sleep(self.duration)
             if self.stop:
                 break
-            bot.send_message(self.id, "......breathe out")
+            bot.send_message(self.id, "Breathe out......")
             time.sleep(self.duration)
             for i in range(2, self.max_count + 1):
                 if self.stop:
                     break
-                bot.send_message(self.id, f"{i}...")
+                bot.send_message(self.id, f"...{i}")
                 time.sleep(self.duration)
             if self.stop:
                 break
-            bot.send_message(self.id, "Hold...")
+            bot.send_message(self.id, "hold...")
             time.sleep(self.duration)
             for i in range(2, self.max_count + 1):
                 if self.stop:
                     break
-                bot.send_message(self.id, f"{i}...")
+                bot.send_message(self.id, f"...{i}")
                 time.sleep(self.duration)
             if counter % 15 == 0:
                 bot.send_message(self.id, "Rmb, you can /stop anytime, or go /faster or /slower.")
@@ -98,18 +96,18 @@ class BreatheSession:
         self.stop = True
 
     def increase_duration(self):
-        if self.duration > 2:
-            bot.send_message(self.id, f"Already at slowest rate ({self.duration + 0.2}x)")
+        if self.duration >= 1.5:
+            bot.send_message(self.id, f"Already at slowest rate ({1 + DEFAULT_DURATION - self.duration}x)")
         else:
-            self.duration += 0.2
-            bot.send_message(self.id, f"Okay, breathing slower ({self.duration + 0.2}x)")
+            self.duration += 0.1
+            bot.send_message(self.id, f"Okay, breathing slower ({1 + DEFAULT_DURATION - self.duration}x)")
 
     def decrease_duration(self):
         if self.duration <= 0.2:
-            bot.send_message(self.id, f"Already at fastest rate ({self.duration + 0.2}x)")
+            bot.send_message(self.id, f"Already at fastest rate ({1 + DEFAULT_DURATION - self.duration}x)")
         else:
-            self.duration -= 0.2
-            bot.send_message(self.id, f"Okay, breathing faster ({self.duration + 0.2}x)")
+            self.duration -= 0.1
+            bot.send_message(self.id, f"Okay, breathing faster ({1 + DEFAULT_DURATION - self.duration}x)")
 
 
 @bot.message_handler(commands=["start"])
