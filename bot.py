@@ -97,17 +97,17 @@ class BreatheSession:
 
     def increase_duration(self):
         if self.duration >= 1.5:
-            bot.send_message(self.id, f"Already at slowest rate ({1 + DEFAULT_DURATION - self.duration}x)")
+            bot.send_message(self.id, f"Already at slowest rate ({1 + DEFAULT_DURATION - self.duration:.1f}x)")
         else:
             self.duration += 0.1
-            bot.send_message(self.id, f"Okay, breathing slower ({1 + DEFAULT_DURATION - self.duration}x)")
+            bot.send_message(self.id, f"Okay, breathing slower ({1 + DEFAULT_DURATION - self.duration:.1f}x)")
 
     def decrease_duration(self):
         if self.duration <= 0.2:
-            bot.send_message(self.id, f"Already at fastest rate ({1 + DEFAULT_DURATION - self.duration}x)")
+            bot.send_message(self.id, f"Already at fastest rate ({1 + DEFAULT_DURATION - self.duration:.1f}x)")
         else:
             self.duration -= 0.1
-            bot.send_message(self.id, f"Okay, breathing faster ({1 + DEFAULT_DURATION - self.duration}x)")
+            bot.send_message(self.id, f"Okay, breathing faster ({1 + DEFAULT_DURATION - self.duration:.1f}x)")
 
 
 @bot.message_handler(commands=["start"])
