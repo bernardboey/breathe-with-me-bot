@@ -40,21 +40,49 @@ class BreatheSession:
     def breathe(self):
         self.stop = False
         bot.send_message(self.id, "Okay! Stop anytime by telling me /stop")
-        time.sleep(0.5)
+        time.sleep(1)
         bot.send_message(self.id, "Current duration: " + str(self.duration) + " secs")
-        time.sleep(0.5)
+        time.sleep(1)
         bot.send_message(self.id, "You can also tell me /faster or /slower")
-        time.sleep(0.5)
+        time.sleep(1)
         bot.send_message(self.id, "Get ready to breathe with me....")
+        time.sleep(2)
         counter = 1
         while not self.stop and counter < 100:
-            if not self.stop:
-                time.sleep(self.duration)
-            if not self.stop:
-                bot.send_message(self.id, "Breathe in......")
-                time.sleep(self.duration)
-            if not self.stop:
-                bot.send_message(self.id, "......breathe out")
+            bot.send_message(self.id, "Breathe in......")
+            time.sleep(1)
+            for i in range(2, self.duration + 1):
+                if self.stop:
+                    break
+                bot.send_message(self.id, f"{i}...")
+                time.sleep(1)
+            if self.stop:
+                break
+            bot.send_message(self.id, "Hold...")
+            time.sleep(1)
+            for i in range(2, self.duration + 1):
+                if self.stop:
+                    break
+                bot.send_message(self.id, f"{i}...")
+                time.sleep(1)
+            if self.stop:
+                break
+            bot.send_message(self.id, "......breathe out")
+            time.sleep(1)
+            for i in range(2, self.duration + 1):
+                if self.stop:
+                    break
+                bot.send_message(self.id, f"{i}...")
+                time.sleep(1)
+            if self.stop:
+                break
+            bot.send_message(self.id, "Hold...")
+            time.sleep(1)
+            for i in range(2, self.duration + 1):
+                if self.stop:
+                    break
+                bot.send_message(self.id, f"{i}...")
+                time.sleep(1)
             if counter % 15 == 0:
                 bot.send_message(self.id, "Rmb, you can /stop anytime, or go /faster or /slower.")
             if counter % 7 == 0:
@@ -72,14 +100,14 @@ class BreatheSession:
         if self.duration > 15:
             bot.send_message(self.id, "Already at slowest rate (" + str(self.duration) + " secs)")
         else:
-            self.duration += 0.5
+            self.duration += 1
             bot.send_message(self.id, "Okay, breathing slower (" + str(self.duration) + " secs)")
 
     def decrease_duration(self):
-        if self.duration < 1:
+        if self.duration <= 2:
             bot.send_message(self.id, "Already at fastest rate (" + str(self.duration) + " secs)")
         else:
-            self.duration -= 0.5
+            self.duration -= 1
             bot.send_message(self.id, "Okay, breathing faster (" + str(self.duration) + " secs)")
 
 
