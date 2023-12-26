@@ -3,11 +3,12 @@ import random
 import threading
 import os
 
+import dotenv
 import telebot
 from flask import Flask, request
-from decouple import config
 
-bot_token = config("BOT_TOKEN")
+dotenv.load_dotenv()
+bot_token = os.environ["BOT_TOKEN"]
 
 bot = telebot.TeleBot(token=bot_token)
 server = Flask(__name__)
@@ -170,4 +171,5 @@ def webhook():
 
 
 if __name__ == "__main__":
-    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 8443)))
+    bot.polling()
+    # server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 8443)))
