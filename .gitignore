@@ -1,1 +1,16 @@
+# IDEA files
+.idea
+/out/
+/*.iml
+
+#Python
+venv
+.venv
+__pycache__
+*.pyc
+
+# Log files
+*.log
+.logs
+
 .env
